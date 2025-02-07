@@ -1,0 +1,29 @@
+/* Navbar Background */
+.nav-bg {
+  background-color: #27293d !important;
+}
+
+/* Navbar Brand */
+.nav-bg .navbar-brand {
+  color: #d2d2d5 !important;
+  font-weight: 500;
+}
+
+.nav-link {
+  color: #d2d2d5 !important;
+  font-weight: 400;
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  display: inline-block;
+  transform-origin: center;
+}
+
+.nav-link:hover,
+.nav-link:active {
+  color: #fc5888 !important; /* Set pink on hover & active */
+  transform: scale(1.1);
+  border-radius: 5px;
+}
+
+.nav-bg .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}

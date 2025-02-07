@@ -1,0 +1,240 @@
+<div class="container-fluid my-3">
+  <div class="d-flex flex-wrap justify-content-center mx-3">
+    <div class="form-wrapper p-5 shadow-lg rounded-3" style="flex: 0 0 100%">
+      <h3 class="mb-4 text-start">Add University</h3>
+      <form [formGroup]="universityForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- University Name -->
+        <div class="mb-4">
+          <label for="nameInput" class="form-label custom-label">
+            University Name
+          </label>
+          <input
+            type="text"
+            class="form-control custom-input"
+            id="nameInput"
+            placeholder="e.g. Harvard University"
+            formControlName="name"
+            [class.is-invalid]="
+              universityForm.get('name')?.invalid &&
+              (universityForm.get('name')?.touched ||
+                universityForm.get('name')?.dirty)
+            "
+          />
+          <div
+            class="invalid-feedback d-block"
+            *ngIf="
+              universityForm.get('name')?.invalid &&
+              (universityForm.get('name')?.touched ||
+                universityForm.get('name')?.dirty)
+            "
+          >
+            <div *ngIf="universityForm.get('name')?.errors?.['required']">
+              University name is required.
+            </div>
+            <div *ngIf="universityForm.get('name')?.errors?.['minlength']">
+              Minimum 3 characters required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Country Selection -->
+        <div class="mb-4">
+          <label class="form-label custom-label">Country</label>
+          <select
+            class="form-select custom-input"
+            formControlName="country"
+            (change)="onCountrySelect($event)"
+            [class.is-invalid]="
+              universityForm.get('country')?.invalid &&
+              (universityForm.get('country')?.touched ||
+                universityForm.get('country')?.dirty)
+            "
+          >
+            <option value="">Select Country</option>
+            <option *ngFor="let country of countries" [value]="country.name">
+              {{ country.name }} ({{ country.sortname }})
+            </option>
+          </select>
+          <div
+            class="invalid-feedback d-block"
+            *ngIf="
+              universityForm.get('country')?.invalid &&
+              (universityForm.get('country')?.touched ||
+                universityForm.get('country')?.dirty)
+            "
+          >
+            Country selection is required.
+          </div>
+        </div>
+
+        <!-- Alpha Code -->
+        <div class="mb-4">
+          <label for="alphaCodeInput" class="form-label custom-label">
+            Alpha-2 Code
+          </label>
+          <input
+            type="text"
+            class="form-control custom-input"
+            id="alphaCodeInput"
+            placeholder="e.g. US"
+            formControlName="alpha_two_code"
+            readonly
+          />
+        </div>
+
+        <!-- Web Pages -->
+        <div class="mb-4">
+          <label class="form-label custom-label">Website URLs</label>
+          <div formArrayName="web_pages">
+            <div
+              *ngFor="let wp of webPages.controls; let i = index"
+              class="mb-3"
+            >
+              <div class="input-group">
+                <input
+                  type="url"
+                  class="form-control custom-input"
+                  placeholder="https://example.com"
+                  [formControlName]="i"
+                  [id]="'webPageInput' + i"
+                  [class.is-invalid]="
+                    webPages.controls[i].invalid &&
+                    (webPages.controls[i].touched || webPages.controls[i].dirty)
+                  "
+                />
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="removeWebPage(i)"
+                  [disabled]="webPages.length === 1"
+                >
+                  &times;
+                </button>
+              </div>
+              <div
+                class="invalid-feedback d-block"
+                *ngIf="
+                  webPages.controls[i].invalid &&
+                  (webPages.controls[i].touched || webPages.controls[i].dirty)
+                "
+              >
+                <div *ngIf="webPages.controls[i].errors?.['required']">
+                  Web page URL is required.
+                </div>
+                <div *ngIf="webPages.controls[i].errors?.['pattern']">
+                  Valid URL starting with http:// or https:// required.
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="array-btn btn btn-sm mt-2"
+            (click)="addWebPage()"
+          >
+            Add Another Website
+          </button>
+        </div>
+
+        <!-- Domains -->
+        <div class="mb-4">
+          <label class="form-label custom-label">Domains</label>
+          <div formArrayName="domains">
+            <div
+              *ngFor="let domain of domains.controls; let i = index"
+              class="mb-3"
+            >
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control custom-input"
+                  placeholder="example.com"
+                  [formControlName]="i"
+                  [id]="'domainInput' + i"
+                  [class.is-invalid]="
+                    domains.controls[i].invalid &&
+                    (domains.controls[i].touched || domains.controls[i].dirty)
+                  "
+                />
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  (click)="removeDomain(i)"
+                  [disabled]="domains.length === 1"
+                >
+                  &times;
+                </button>
+              </div>
+              <div
+                class="invalid-feedback d-block"
+                *ngIf="
+                  domains.controls[i].invalid &&
+                  (domains.controls[i].touched || domains.controls[i].dirty)
+                "
+              >
+                <div *ngIf="domains.controls[i].errors?.['required']">
+                  Domain is required.
+                </div>
+                <div *ngIf="domains.controls[i].errors?.['pattern']">
+                  Valid domain format required (e.g., example.com).
+                </div>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            class="array-btn btn btn-sm mt-2"
+            (click)="addDomain()"
+          >
+            Add Another Domain
+          </button>
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="btn btn-mt mt-4 pe-5 ps-5 mx-auto add-button"
+          [disabled]="universityForm.invalid || loading"
+        >
+          <span
+            *ngIf="loading"
+            class="spinner-border spinner-border-sm me-2"
+          ></span>
+          {{ loading ? "Saving..." : "Submit" }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal  -->
+<div
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  *ngIf="showModal"
+  [ngClass]="{ 'show d-block': showModal }"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">University Added</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>The university has been added successfully!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="closeModal()">
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade show" *ngIf="showModal"></div>

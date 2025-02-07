@@ -1,0 +1,72 @@
+.custom-input {
+  background-color: #27293d !important;
+  color: #ced4da !important;
+  border: 1px solid #b7bcee;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-input::placeholder {
+  color: #ced4da !important;
+  opacity: 1;
+}
+
+.custom-input:focus {
+  border: 2px solid #ced4da !important;
+  box-shadow: 0 0 5px rgba(206, 212, 218, 0.5);
+  outline: none;
+}
+
+.custom-label {
+  color: #eeeeee !important;
+  font-weight: 500;
+}
+
+.is-invalid {
+  border-color: #fc5888 !important;
+}
+
+.is-invalid:focus {
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+.invalid-feedback {
+  font-size: 0.875rem;
+  color: #f13d4f;
+}
+
+.add-button {
+  background-color: #e04372 !important;
+  border-color: #bbbbbb !important;
+  color: #ffffff;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.add-button:hover {
+  background-color: #fc5888 !important;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.form-wrapper {
+  background-color: #27293d !important;
+  color: #ced4da !important;
+}
+
+form {
+  color: #ced4da;
+}
+
+/* Array Buttons Styling using color #fc5888 */
+.array-btn {
+  border: 1px solid #fc5888 !important;
+  background-color: transparent;
+  color: #fc5888 !important;
+  transition: background-color 0.3s, transform 0.2s, color 0.3s;
+}
+
+.array-btn:hover {
+  background-color: #fc5888 !important;
+  color: #ffffff !important;
+  transform: scale(1.05);
+  cursor: pointer;
+}

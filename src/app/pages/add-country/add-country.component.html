@@ -1,0 +1,126 @@
+<div class="container-fluid my-4">
+  <div class="d-flex flex-wrap justify-content-center mx-4 ms-5 me-4">
+    <!-- Form Section -->
+    <div class="p-5 shadow-lg rounded-3 me-4 bg-light" style="flex: 0 0 100%">
+      <h3 class="mb-4 text-start">Add Country</h3>
+      <form [formGroup]="countryForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Country Name -->
+        <div class="mb-4">
+          <label for="nameInput" class="form-label custom-label"
+            >Country Name</label
+          >
+          <input
+            type="text"
+            class="form-control custom-input"
+            id="nameInput"
+            placeholder="e.g. United States"
+            formControlName="name"
+            [class.is-invalid]="
+              countryForm.get('name')?.invalid &&
+              (countryForm.get('name')?.touched ||
+                countryForm.get('name')?.dirty)
+            "
+          />
+          <div class="invalid-feedback">Country Name is required.</div>
+        </div>
+
+        <!-- Country Code -->
+        <div class="mb-4">
+          <label for="codeInput" class="form-label custom-label"
+            >Country Code</label
+          >
+          <input
+            type="text"
+            class="form-control custom-input"
+            id="codeInput"
+            placeholder="e.g. US"
+            formControlName="sortname"
+            maxlength="2"
+            [class.is-invalid]="
+              countryForm.get('sortname')?.invalid &&
+              (countryForm.get('sortname')?.touched ||
+                countryForm.get('sortname')?.dirty)
+            "
+          />
+          <div class="invalid-feedback">
+            <div *ngIf="countryForm.get('sortname')?.errors?.['required']">
+              Country Code is required.
+            </div>
+            <div *ngIf="countryForm.get('sortname')?.errors?.['pattern']">
+              Must be exactly 2 letters.
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Code -->
+        <div class="mb-4">
+          <label for="phoneCodeInput" class="form-label custom-label"
+            >Phone Code</label
+          >
+          <input
+            type="text"
+            class="form-control custom-input"
+            id="phoneCodeInput"
+            placeholder="e.g. +1"
+            formControlName="phoneCode"
+            [class.is-invalid]="
+              countryForm.get('phoneCode')?.invalid &&
+              (countryForm.get('phoneCode')?.touched ||
+                countryForm.get('phoneCode')?.dirty)
+            "
+          />
+          <div class="invalid-feedback">
+            <div *ngIf="countryForm.get('phoneCode')?.errors?.['required']">
+              Phone Code is required.
+            </div>
+            <div *ngIf="countryForm.get('phoneCode')?.errors?.['pattern']">
+              Only numbers are allowed.
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="btn btn-mt pe-5 ps-5 mx-auto mt-5 add-button"
+            [disabled]="countryForm.invalid"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap Modal -->
+<div
+  class="modal fade"
+  id="confirmationModal"
+  tabindex="-1"
+  aria-labelledby="confirmationModalLabel"
+  aria-hidden="true"
+  #confirmationModal
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmationModalLabel">Country Added</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">The country has been successfully added!</div>
+      <div class="modal-footer">
+        <!-- When the user clicks OK, call onModalConfirm() -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="onModalConfirm()"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

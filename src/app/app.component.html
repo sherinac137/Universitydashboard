@@ -1,0 +1,15 @@
+<body class="d-flex flex-column min-vh-100">
+  <div class="d-flex flex-grow-1">
+    <app-sidebar></app-sidebar>
+    <div class="d-flex flex-column flex-grow-1">
+      <main class="d-flex flex-column flex-grow-1">
+        <app-header></app-header>
+        <div class="flex-grow-1">
+          <router-outlet></router-outlet>
+        </div>
+        <!-- Footer placed at the end -->
+        <app-footer class="mt-auto"></app-footer>
+      </main>
+    </div>
+  </div>
+</body>

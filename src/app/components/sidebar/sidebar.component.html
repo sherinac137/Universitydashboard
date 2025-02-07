@@ -1,0 +1,65 @@
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+  rel="stylesheet"
+/>
+
+<aside
+  class="sidebar shadow-lg d-flex flex-column p-4 min-vh-100"
+  style="width: 300px"
+>
+  <!-- Sidebar Navigation -->
+  <nav class="nav flex-column h-100">
+    <!-- Brand -->
+    <div class="mb-3 mt-2">
+      <a href="#" class="nav-link text-white fw-bold d-flex align-items-center">
+        <i class="bi bi-globe-americas fs-1"></i>
+        <span class="sidebar-text ms-3 fs-1">Finder</span>
+      </a>
+    </div>
+    <span class="sidebar-text ms-3 fs-5 fw-semibold"
+      >MENU
+      <hr class="thick-hr text-white mb-3" style="background-color: #eeeeee"
+    /></span>
+
+    <!-- Conditional Menus -->
+    <div class="flex-grow-1">
+      <div *ngIf="activeMenu === 'country'">
+        <a
+          class="side-menu nav-link text-white d-flex align-items-center mb-2"
+          routerLink="/add-country"
+          routerLinkActive="active"
+        >
+          <i class="bi bi-plus-circle fs-2 menu-icon"></i>
+          <span class="sidebar-text ms-3 fs-6 menu-text">Add Country</span>
+        </a>
+        <a
+          class="side-menu nav-link text-white d-flex align-items-center"
+          routerLink="/list-country"
+          routerLinkActive="active"
+        >
+          <i class="bi bi-list fs-2 menu-icon"></i>
+          <span class="sidebar-text ms-3 fs-6 menu-text">List Country</span>
+        </a>
+      </div>
+
+      <div *ngIf="activeMenu === 'university'">
+        <a
+          class="side-menu nav-link text-dark d-flex align-items-center mb-2"
+          routerLink="/add-university"
+          routerLinkActive="active"
+        >
+          <i class="bi bi-plus-circle fs-2 menu-icon"></i>
+          <span class="sidebar-text ms-3 fs-6 menu-text">Add University</span>
+        </a>
+        <a
+          class="side-menu nav-link text-dark d-flex align-items-center"
+          routerLink="/list-university"
+          routerLinkActive="active"
+        >
+          <i class="bi bi-list fs-2 menu-icon"></i>
+          <span class="sidebar-text ms-3 fs-6 menu-text">List University</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+</aside>

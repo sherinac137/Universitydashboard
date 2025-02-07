@@ -1,0 +1,50 @@
+.sidebar {
+  transition: width 0.3s ease-in-out;
+  color: #eeeeee;
+  min-height: 100vh;
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+/* Reduce Sidebar Width on Small Screens */
+@media (max-width: 992px) {
+  .sidebar {
+    width: 120px !important;
+  }
+  .sidebar .sidebar-text {
+    display: none !important;
+  }
+  .sidebar .nav-link {
+    justify-content: center !important;
+  }
+}
+aside {
+  background: rgb(216, 75, 65);
+  background: linear-gradient(0deg, #ec250d 0, #fd5d93 100%);
+}
+.side-menu:hover {
+  background-color: #eeeeee;
+  color: #181818;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+.side-menu .menu-icon,
+.side-menu .menu-text {
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+.side-menu:hover .menu-icon,
+.side-menu:hover .menu-text {
+  color: #000000 !important;
+}
+.side-menu.active .menu-icon,
+.side-menu.active .menu-text {
+  color: #000000 !important;
+}
+
+.thick-hr {
+  border: none;
+  height: 2px;
+  background-color: white;
+  margin: 5px 0;
+  border-radius: 2px;
+}

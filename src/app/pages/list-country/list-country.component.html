@@ -1,0 +1,171 @@
+<div class="container-fluid">
+  <!-- Search Form -->
+  <form class="d-flex ms-auto pe-3 ps-3 mb-3 mb-md-5 custom-search-form">
+    <div class="position-relative w-100 w-md-50">
+      <input
+        class="custom-search-input form-control shadow-lg rounded-pill ps-5 py-2 py-md-3 fs-5 fs-md-4"
+        type="search"
+        placeholder="Search countries..."
+        aria-label="Search"
+        [(ngModel)]="searchTerm"
+        name="searchTerm"
+        (input)="filterCountries()"
+      />
+      <i
+        class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 fs-3 fs-md-2 text-secondary"
+      ></i>
+      <small
+        class="text-danger position-absolute start-0 top-100 mt-1 mt-1 fs-7 fs-md-6"
+        *ngIf="searchTerm && filteredCountries.length === 0"
+      >
+        No search results found.
+      </small>
+    </div>
+  </form>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger fs-6 fs-md-5">
+    {{ errorMessage }}
+  </div>
+
+  <div class="container-fluid p-2 p-md-3">
+    <div class="rounded-4 p-2 p-md-3 shadow-lg custom-table">
+      <div class="">
+        <h4 class="fs-3 fs-md-2 mb-3" style="color: #ced4da">Countries List</h4>
+        <table class="table table-hover table-responsive">
+          <thead>
+            <tr>
+              <!-- Name Column -->
+              <th class="fs-6 fs-md-5" style="width: 40%">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>Name</span>
+                  <button
+                    type="button"
+                    class="btn btn-link p-0"
+                    (click)="toggleSort('name')"
+                  >
+                    <i
+                      class="bi text-dark"
+                      [ngClass]="
+                        sortColumn === 'name' && sortDirection === 'asc'
+                          ? 'bi-sort-up'
+                          : 'bi-sort-down'
+                      "
+                    ></i>
+                  </button>
+                </div>
+              </th>
+
+              <!-- Code Column -->
+              <th class="fs-6 fs-md-5" style="width: 30%">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>Code</span>
+                  <button
+                    type="button"
+                    class="btn btn-link p-0"
+                    (click)="toggleSort('sortname')"
+                  >
+                    <i
+                      class="bi text-dark"
+                      [ngClass]="
+                        sortColumn === 'sortname' && sortDirection === 'asc'
+                          ? 'bi-sort-up'
+                          : 'bi-sort-down'
+                      "
+                    >
+                    </i>
+                  </button>
+                </div>
+              </th>
+
+              <!-- Phone Code Column -->
+              <th class="fs-6 fs-md-5" style="width: 30%">
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>Phone Code</span>
+                  <button
+                    type="button"
+                    class="btn btn-link p-0"
+                    (click)="toggleSort('phoneCode')"
+                  >
+                    <i
+                      class="bi text-dark"
+                      [ngClass]="
+                        sortColumn === 'phoneCode' && sortDirection === 'asc'
+                          ? 'bi-sort-up'
+                          : 'bi-sort-down'
+                      "
+                    >
+                    </i>
+                  </button>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let country of filteredCountries"
+              [class.table-info]="localCountries.includes(country)"
+            >
+              <td class="fs-6 py-2">{{ country.name }}</td>
+              <td class="fs-6 py-2">{{ country.sortname }}</td>
+              <td class="fs-6 py-2">{{ country.phoneCode }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <nav *ngIf="totalPages > 1" class="mt-4">
+        <ul class="pagination justify-content-center flex-wrap gap-1 gap-md-2">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a
+              class="page-link fs-6 fs-md-5"
+              (click)="changePage(currentPage - 1)"
+              aria-label="Previous"
+            >
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+
+          <li class="page-item" *ngIf="currentPage > 3">
+            <a class="page-link fs-6 fs-md-5" (click)="changePage(1)">1</a>
+          </li>
+          <li class="page-item disabled" *ngIf="currentPage > 4">
+            <span class="page-link fs-6 fs-md-5">...</span>
+          </li>
+
+          <li
+            class="page-item mx-0 mx-md-1"
+            *ngFor="let page of getPaginationPages()"
+            [class.active]="currentPage === page"
+          >
+            <a class="page-link fs-6 fs-md-5" (click)="changePage(page)">{{
+              page
+            }}</a>
+          </li>
+
+          <li class="page-item disabled" *ngIf="currentPage < totalPages - 3">
+            <span class="page-link fs-6 fs-md-5">...</span>
+          </li>
+          <li class="page-item" *ngIf="currentPage < totalPages - 2">
+            <a
+              class="page-link fs-6 fs-md-5"
+              (click)="changePage(totalPages)"
+              >{{ totalPages }}</a
+            >
+          </li>
+
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a
+              class="page-link fs-6 fs-md-5"
+              (click)="changePage(currentPage + 1)"
+              aria-label="Next"
+            >
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

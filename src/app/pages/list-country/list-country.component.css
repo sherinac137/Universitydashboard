@@ -1,0 +1,77 @@
+.custom-search-form input[type="search"]:not(:placeholder-shown) {
+  color: #ced4da !important;
+}
+
+.custom-search-form input[type="search"] {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.custom-search-form input[type="search"]:focus {
+  border: 2px solid #ced4da;
+}
+.custom-search-form .bi-search {
+  color: #eeeeee;
+  transition: color 0.3s;
+}
+.custom-search-form small {
+  font-size: 0.875rem;
+  position: absolute;
+  top: 105%;
+  left: 1rem;
+}
+.custom-search-input {
+  background-color: #27293d !important;
+  border-color: #27293d;
+}
+.custom-search-input::placeholder {
+  color: #ced4da;
+  opacity: 1;
+}
+
+.container-fluid .border.rounded-4 {
+  background-color: #27293d;
+}
+.custom-search-form .bi-search {
+  color: #ced4da !important;
+  transition: color 0.3s ease;
+}
+
+.custom-table {
+  background-color: #27293d !important;
+  color: #ced4da !important;
+  border-collapse: collapse;
+}
+
+.custom-table thead th {
+  background-color: #31334e !important;
+  border-radius: 5px;
+  color: #ced4da !important;
+  border-bottom: none !important;
+}
+.custom-table tbody tr td {
+  background-color: #27293d !important;
+  color: #ced4da;
+  border-bottom: none !important;
+}
+.custom-table thead th i {
+  color: #fc5888 !important;
+}
+.custom-table thead th:hover i {
+  color: #ebd4db !important;
+}
+
+.pagination .page-item .page-link {
+  background-color: #ced4da;
+  border: 5px #27293d;
+  border-radius: 3px;
+  color: #222222;
+  font-weight: 500;
+}
+.pagination .page-item.active .page-link {
+  background-color: #373958;
+  color: white;
+}
+.pagination .page-item .page-link:hover {
+  background-color: #fc5888;
+  color: white;
+  cursor: pointer;
+}
